@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  BarChart3, 
-  FileText, 
-  Briefcase, 
-  Settings, 
-  Plus,
-  Edit,
-  Trash2,
-  Eye,
-  LogOut,
-  Users
-} from 'lucide-react';
+import { BarChart3, FileText, Briefcase, Settings, Plus, CreditCard as Edit, Trash2, Eye, LogOut, Users } from 'lucide-react';
 import { supabase, blogAPI, portfolioAPI, servicesAPI, BlogPost, PortfolioProject, Service } from '../../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
