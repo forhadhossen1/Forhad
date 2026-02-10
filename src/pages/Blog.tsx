@@ -2,9 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Tag } from 'lucide-react';
-import { blogPosts } from '../data/mockData';
+import { useBlogPosts } from '../hooks/useSupabaseData';
 
 const Blog = () => {
+  const { posts: blogPosts, loading } = useBlogPosts();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-accent-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-20 min-h-screen bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

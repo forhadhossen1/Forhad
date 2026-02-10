@@ -2,11 +2,38 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Tag } from 'lucide-react';
-import { blogPosts } from '../data/mockData';
+import { blogAPI } from '../lib/supabase';
+import { useState, useEffect } from 'react';
 
 const BlogPost = () => {
   const { id } = useParams();
-  const post = blogPosts.find(p => p.id === parseInt(id || '0'));
+  const [post, setPost] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        if (id) {
+          const postData = await blogAPI.getById(id);
+          setPost(postData);
+        }
+      } catch (error) {
+        console.error('Failed to fetch post:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="pt-20 min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-accent-500"></div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (

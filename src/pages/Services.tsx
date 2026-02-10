@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
-import { services } from '../data/mockData';
+import { useServices } from '../hooks/useSupabaseData';
 import ServiceModal from '../components/ServiceModal';
 
 const Services = () => {

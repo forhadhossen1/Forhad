@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Filter } from 'lucide-react';
-import { projects } from '../data/mockData';
+import { usePortfolioProjects } from '../hooks/useSupabaseData';
 
 const Portfolio = () => {
+  const { projects, loading } = usePortfolioProjects();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))];
   
   const filteredProjects = selectedCategory === 'All' 
     ? projects 
     : projects.filter(p => p.category === selectedCategory);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-accent-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-20 min-h-screen relative floating-shapes">

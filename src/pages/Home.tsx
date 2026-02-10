@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { ChevronDown, ArrowRight, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
-import { services, projects, testimonials, certifications } from '../data/mockData';
+import { testimonials, certifications } from '../data/mockData';
+import { useServices, usePortfolioProjects } from '../hooks/useSupabaseData';
 
 const Home = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const { services, loading: servicesLoading } = useServices();
+  const { projects, loading: projectsLoading } = usePortfolioProjects();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,6 +21,14 @@ const Home = () => {
   const scrollToNext = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
+
+  if (servicesLoading || projectsLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-accent-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen relative floating-shapes">
@@ -89,7 +100,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.slice(0, 6).map((service, index) => {
-              const IconComponent = Icons[service.icon as keyof typeof Icons] as React.ComponentType<any>;
+              const IconComponent = (Icons as any)[service.icon] || Icons.Star;
               return (
                 <motion.div
                   key={service.id}

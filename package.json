@@ -11,12 +11,19 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/supabase-js": "^2.95.3",
     "@types/react-router-dom": "^5.3.3",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.344.0",
+    "quill": "^2.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.62.0",
+    "react-hot-toast": "^2.6.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^7.7.1"
   },
   "devDependencies": {
