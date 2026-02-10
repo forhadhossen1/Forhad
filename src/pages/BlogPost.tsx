@@ -45,6 +45,14 @@ const BlogPost = () => {
         >
           <div className="mb-8">
             <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+              <span className="mr-4">By {post.author}</span>
+              <span className="mr-4">•</span>
+              <span className="mr-4">{new Date(post.date).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}</span>
+              <span className="mr-4">•</span>
               <span className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-3 py-1 text-xs font-medium">
                 {post.category}
               </span>
@@ -76,6 +84,16 @@ const BlogPost = () => {
             alt={post.title}
             className="w-full h-64 md:h-96 object-cover mb-12 shadow-lg"
           />
+
+          {/* SEO Meta Information */}
+          <div className="glass-card glass-card-light dark:glass-card-dark p-4 mb-8 rounded-lg">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Article Summary
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {post.seo?.metaDescription || post.summary}
+            </p>
+          </div>
 
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">

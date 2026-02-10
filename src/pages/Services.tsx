@@ -1,9 +1,24 @@
 import React from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { services } from '../data/mockData';
+import ServiceModal from '../components/ServiceModal';
 
 const Services = () => {
+  const [selectedService, setSelectedService] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleServiceClick = (service: any) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedService(null);
+  };
+
   return (
     <div className="pt-20 min-h-screen relative floating-shapes">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -36,7 +51,8 @@ const Services = () => {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-card glass-card-light dark:glass-card-dark p-8 hover:scale-105 transition-all duration-300 rounded-xl group"
+                className="glass-card glass-card-light dark:glass-card-dark p-8 hover:scale-105 transition-all duration-300 rounded-xl group cursor-pointer"
+                onClick={() => handleServiceClick(service)}
               >
                 <div className="flex items-start space-x-6">
                   <div className="bg-accent-500 w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent-600 transition-colors">
@@ -53,6 +69,11 @@ const Services = () => {
                       <p className="text-accent-600 dark:text-accent-400 font-medium">
                         Why it matters: {service.importance}
                       </p>
+                    </div>
+                    <div className="mt-4">
+                      <span className="text-accent-500 font-medium hover:text-accent-600 transition-colors">
+                        Click to learn more →
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -79,6 +100,15 @@ const Services = () => {
           </a>
         </motion.div>
       </div>
+
+      {/* Service Modal */}
+      {selectedService && (
+        <ServiceModal
+          service={selectedService}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

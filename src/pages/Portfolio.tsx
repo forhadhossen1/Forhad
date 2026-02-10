@@ -89,9 +89,16 @@ const Portfolio = () => {
 
               <div className="p-8">
                 <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     {project.title}
                   </h3>
+                    {project.featured && (
+                      <span className="bg-accent-500 text-white px-2 py-1 text-xs rounded-full">
+                        Featured
+                      </span>
+                    )}
+                  </div>
                   <span className="bg-accent-500 text-white px-3 py-1 text-sm font-medium rounded-full">
                     {project.category}
                   </span>
@@ -100,6 +107,15 @@ const Portfolio = () => {
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
                   {project.description}
                 </p>
+
+                {project.content && (
+                  <div className="glass-card glass-card-light dark:glass-card-dark p-4 mb-6 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Project Details:</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+                      {project.content}
+                    </p>
+                  </div>
+                )}
 
                 <div className="mb-6">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Tools Used:</h4>

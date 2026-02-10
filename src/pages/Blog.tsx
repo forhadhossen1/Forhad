@@ -51,6 +51,24 @@ const Blog = () => {
               </div>
 
               <div className="p-6">
+                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <span>By {post.author}</span>
+                  <span className="mx-2">•</span>
+                  <span>{new Date(post.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })}</span>
+                  {post.featured && (
+                    <>
+                      <span className="mx-2">•</span>
+                      <span className="bg-accent-500 text-white px-2 py-1 text-xs rounded-full">
+                        Featured
+                      </span>
+                    </>
+                  )}
+                </div>
+
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                   {post.title}
                 </h2>
